@@ -38,6 +38,6 @@ jobs:
             # LOCAL_NOTEBOOKS_PATH
             local-path: './'
             # REMOTE_NOTEBOOK_PATH
-            remote-path: '/Project/'
+            remote-path: '/Project1/'
 
       
