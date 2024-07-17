@@ -21,10 +21,9 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Install Databricks CLI
-        run: |
-          pip install databricks-cli
-
+      - name: install-databricks-cli
+        uses: microsoft/install-databricks-cli@v1.0.0
+        
       - name: Deploy Databricks Job
         env:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
