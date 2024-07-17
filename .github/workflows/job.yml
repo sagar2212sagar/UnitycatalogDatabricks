@@ -26,10 +26,8 @@ jobs:
           pip install databricks-cli
 
       - name: Deploy Databricks Job
-        run: |
-          # Replace placeholders with your actual values
+        env:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-          DATABRICKS_WORKSPACE_URL: ${{ secrets.DATABRICKS_HOST }}
-
-          # Example Databricks CLI command to deploy a job
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        run: |
           databricks jobs create --json-file Jobs/${{ github.event.inputs.GIT_JOB_NAME}} --token $DATABRICKS_TOKEN --workspace-url $DATABRICKS_HOST
