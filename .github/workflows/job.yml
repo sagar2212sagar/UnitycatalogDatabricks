@@ -1,0 +1,35 @@
+name: Deploy Databricks Job
+
+on:
+  workflow_dispatch:
+    inputs:
+      GIT_JOB_NAME:
+        description: 'Notebooks Relative Path in Git'
+        required: true
+        default: 'Jobs/'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10
+
+      - name: Install Databricks CLI
+        run: |
+          pip install databricks-cli
+
+      - name: Deploy Databricks Job
+        run: |
+          # Replace placeholders with your actual values
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_WORKSPACE_URL: ${{ secrets.DATABRICKS_HOST }}
+
+          # Example Databricks CLI command to deploy a job
+          databricks jobs create --json-file Jobs/${{ github.event.inputs.GIT_JOB_NAME}}.json --token $DATABRICKS_TOKEN --workspace-url $DATABRICKS_HOST
