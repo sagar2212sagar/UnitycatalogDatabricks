@@ -6,7 +6,7 @@ on:
       GIT_JOB_NAME:
         description: 'Notebooks Relative Path in Git'
         required: true
-        default: 'Jobs/'
+        default: ''
 
 jobs:
   deploy:
@@ -19,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.10
+          python-version: 3.8
 
       - name: Install Databricks CLI
         run: |
@@ -32,4 +32,4 @@ jobs:
           DATABRICKS_WORKSPACE_URL: ${{ secrets.DATABRICKS_HOST }}
 
           # Example Databricks CLI command to deploy a job
-          databricks jobs create --json-file Jobs/${{ github.event.inputs.GIT_JOB_NAME}}.json --token $DATABRICKS_TOKEN --workspace-url $DATABRICKS_HOST
+          databricks jobs create --json-file Jobs/${{ github.event.inputs.GIT_JOB_NAME}} --token $DATABRICKS_TOKEN --workspace-url $DATABRICKS_HOST
